@@ -143,7 +143,40 @@ az iot dps enrollment-group create -n dps789 -g IoTEdgeResources\
     --props '{ "Debug": "false"}'
 ```
 
+## Device Config
 
+Copy the full chain cert and the private key to the device:
+
+```
+mkdir device/certs
+cp openssl/certs/device-01-full-chain.cert.pem device/config/full-chain.cert.pem
+cp openssl/private/device-01.key.pem device/config/key.pem
+```
+
+For development purposes, create the `.env` file in the "device" directory:
+
+```sh
+# Global DPS hostname
+PROVISIONING_HOST="global.azure-devices-provisioning.net"
+
+# ID Scope from DPS
+PROVISIONING_IDSCOPE="0ne009ECC61"
+
+# Device ID (must match certificate)
+PROVISIONING_REGISTRATION_ID="device-01"
+
+# Public Cert (Full Chain)
+CERTIFICATE_FILE="config/full-chain.cert.pem"
+
+# Private Key
+KEY_FILE="config/key.pem"
+```
+
+Register the device:
+
+```sh
+node register_x509.js
+```
 
 ## References
 
