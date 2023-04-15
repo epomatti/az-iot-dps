@@ -181,8 +181,13 @@ node register_x509.js
 ## References
 
 https://youtu.be/o0xtIweuwdA
+
 https://youtu.be/w1qwfIrUFOQ
+
 https://azure.microsoft.com/en-us/blog/the-blueprint-to-securely-solve-the-elusive-zerotouch-provisioning-of-iot-devices-at-scale/
+
 https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-x509ca-concept
+
 https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-x509ca-overview
+
 https://www.youtube.com/watch?v=szagwwSLbXo
