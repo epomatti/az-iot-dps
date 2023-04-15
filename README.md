@@ -175,6 +175,7 @@ KEY_FILE="config/key.pem"
 Register the device:
 
 ```sh
+npm install
 node register_x509.js
 ```
 
