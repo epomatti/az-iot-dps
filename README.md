@@ -20,6 +20,9 @@ az iot dps create -n dps789 -g IoTEdgeResources -l westus2
 # Link with the IoT Hub
 hubConnectionString=$(az iot hub connection-string show -n iothub789 --kt primary --query connectionString -o tsv)
 az iot dps linked-hub create --dps-name dps789 --resource-group IoTEdgeResources --connection-string $hubConnectionString
+
+# Verify
+az iot dps show -n dps789
 ```
 
 ## References
