@@ -139,8 +139,8 @@ az iot dps enrollment-group create -n dps789 -g IoTEdgeResources\
     --iot-hubs "iothub789.azure-devices.net" \
     --allocation-policy "hashed" \
     --edge-enabled false \
-    --tags '{ "Environment": "Staging"}' \
-    --props '{ "Debug": "false"}'
+    --tags '{ "Environment": "Staging" }' \
+    --props '{ "Debug": "false" }'
 ```
 
 ## 6 - Device config
