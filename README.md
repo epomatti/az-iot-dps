@@ -119,7 +119,7 @@ Create the certificate chain for Device-01:
 cat ./certs/device-01.cert.pem ./certs/azure-iot-test-only.intermediate.cert.pem ./certs/azure-iot-test-only.root.ca.cert.pem > ./certs/device-01-full-chain.cert.pem
 ```
 
-##  - IoT DPS Config
+## 5 - IoT DPS Config
 
 Upload and verify the certificate:
 
