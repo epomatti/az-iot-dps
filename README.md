@@ -79,6 +79,70 @@ Sign the intermediate certificate with the root CA certificate:
 openssl ca -batch -config ./openssl_root_ca.cnf -passin pass:1234 -extensions v3_intermediate_ca -days 30 -notext -md sha256 -in ./csr/azure-iot-test-only.intermediate.csr.pem -out ./certs/azure-iot-test-only.intermediate.cert.pem
 ```
 
+Examine:
+
+```
+openssl x509 -noout -text -in ./certs/azure-iot-test-only.intermediate.cert.pem
+```
+
+## 4 - Device Certificates
+
+Create the Device-01 private key:
+
+```
+openssl genrsa -out ./private/device-01.key.pem 4096
+```
+
+Create the Device-01 CSR:
+
+> CN must follow standard
+
+```
+openssl req -config ./openssl_device_intermediate_ca.cnf -key ./private/device-01.key.pem -subj '/CN=device-01' -new -sha256 -out ./csr/device-01.csr.pem
+```
+
+Sign the certificate:
+
+```
+openssl ca -batch -config ./openssl_device_intermediate_ca.cnf -passin pass:1234 -extensions usr_cert -days 30 -notext -md sha256 -in ./csr/device-01.csr.pem -out ./certs/device-01.cert.pem
+```
+
+Examine the certificate:
+
+```
+openssl x509 -noout -text -in ./certs/device-01.cert.pem
+```
+
+Create the certificate chain for Device-01:
+
+```
+cat ./certs/device-01.cert.pem ./certs/azure-iot-test-only.intermediate.cert.pem ./certs/azure-iot-test-only.root.ca.cert.pem > ./certs/device-01-full-chain.cert.pem
+```
+
+##  - IoT DPS Config
+
+Upload and verify the certificate:
+
+```
+az iot dps certificate create -n "Test-Only-Root" --dps-name dps789 -g IoTEdgeResources -p certs/azure-iot-test-only.root.ca.cert.pem -v true
+```
+
+Create the enrollment group:
+
+```sh
+az iot dps enrollment-group create -n dps789 -g IoTEdgeResources\
+    --root-ca-name "Test-Only-Root" \
+    --secondary-root-ca-name "Test-Only-Root" \
+    --enrollment-id "DefaultGroup" \
+    --provisioning-status "enabled" \
+    --reprovision-policy "reprovisionandmigratedata" \
+    --iot-hubs "iothub789.azure-devices.net" \
+    --allocation-policy "hashed" \
+    --edge-enabled false \
+    --tags '{ "Environment": "Staging"}' \
+    --props '{ "Debug": "false"}'
+```
+
 
 
 ## References
