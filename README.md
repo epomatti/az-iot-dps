@@ -29,7 +29,7 @@ az iot dps linked-hub create --dps-name dps789 --resource-group IoTEdgeResources
 az iot dps show -n dps789
 ```
 
-## 2 - Root Certificate
+## 2 - Root certificate
 
 Prepare the OpenSSL structure:
 
@@ -85,7 +85,7 @@ Examine:
 openssl x509 -noout -text -in ./certs/azure-iot-test-only.intermediate.cert.pem
 ```
 
-## 4 - Device Certificates
+## 4 - Device certificates
 
 Create the Device-01 private key:
 
@@ -119,7 +119,7 @@ Create the certificate chain for Device-01:
 cat ./certs/device-01.cert.pem ./certs/azure-iot-test-only.intermediate.cert.pem ./certs/azure-iot-test-only.root.ca.cert.pem > ./certs/device-01-full-chain.cert.pem
 ```
 
-## 5 - IoT DPS Config
+## 5 - IoT DPS config
 
 Upload and verify the certificate:
 
@@ -143,7 +143,7 @@ az iot dps enrollment-group create -n dps789 -g IoTEdgeResources\
     --props '{ "Debug": "false"}'
 ```
 
-## Device Config
+## 6 - Device config
 
 Copy the full chain cert and the private key to the device:
 
