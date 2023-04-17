@@ -2,6 +2,8 @@
 
 This demonstration generally follows the [this example](https://learn.microsoft.com/en-us/azure/iot-dps/tutorial-custom-hsm-enrollment-group-x509?tabs=linux&pivots=programming-language-nodejs).
 
+<img src=".assets/dps.png" width=500 />
+
 ## 1 - IoT Hub
 
 Create the IoT Hub:
