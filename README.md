@@ -148,7 +148,7 @@ az iot dps enrollment-group create -n dps789 -g IoTEdgeResources\
 Copy the full chain cert and the private key to the device:
 
 ```
-mkdir device/certs
+mkdir device/config
 cp openssl/certs/device-01-full-chain.cert.pem device/config/full-chain.cert.pem
 cp openssl/private/device-01.key.pem device/config/key.pem
 ```
